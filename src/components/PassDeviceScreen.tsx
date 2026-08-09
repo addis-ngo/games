@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Character, Player } from '../types';
 import { getGuessWhoSettings } from '../utils/storage';
@@ -35,13 +34,8 @@ export const PassDeviceScreen: React.FC<PassDeviceScreenProps> = ({
   const playerLogo = popChar ? popChar.imageUrl : (isP1 ? player1Logo : player2Logo);
 
   return (
-    <div className={`min-h-screen ${bgClass} text-white flex flex-col items-center justify-center p-6 select-none transition-colors duration-300`}>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="w-full max-w-sm flex flex-col items-center text-center font-comic"
-      >
+    <div className={`min-h-screen ${bgClass} text-white flex flex-col items-center justify-center p-6 select-none`}>
+      <div className="w-full max-w-sm flex flex-col items-center text-center font-comic">
         {/* Badge / Avatar Logo */}
         <div className="w-20 h-20 rounded-2xl bg-white/10 border-2 border-white flex items-center justify-center mb-6 shadow-lg overflow-hidden">
           <img
@@ -67,7 +61,7 @@ export const PassDeviceScreen: React.FC<PassDeviceScreenProps> = ({
           I am {playerLabel}
           <ArrowRight className="w-4 h-4 stroke-[2.5]" />
         </button>
-      </motion.div>
+      </div>
     </div>
   );
 };
