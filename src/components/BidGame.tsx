@@ -67,8 +67,8 @@ export const BidGame: React.FC<BidGameProps> = ({
   const p1PassesLeft = Math.max(0, MAX_PASSES - passesUsed.P1);
   const p2PassesLeft = Math.max(0, MAX_PASSES - passesUsed.P2);
 
-  const isP1PassDisabled = p1PassesLeft <= 0 && p1Money >= minRequiredBid;
-  const isP2PassDisabled = p2PassesLeft <= 0 && p2Money >= minRequiredBid;
+  const isP1ActionDisabled = currentHighBidder === null && p1PassesLeft <= 0 && p1Money >= minRequiredBid;
+  const isP2ActionDisabled = currentHighBidder === null && p2PassesLeft <= 0 && p2Money >= minRequiredBid;
 
   // Check game over condition
   useEffect(() => {
@@ -130,16 +130,20 @@ export const BidGame: React.FC<BidGameProps> = ({
     if (animatingWinner) return;
 
     const active = currentTurn;
-    const passesLeft = MAX_PASSES - passesUsed[active];
-    const money = active === 'P1' ? p1Money : p2Money;
+    const isPass = currentHighBidder === null;
 
-    // Prevent pass if player has no passes left and has enough money to bid
-    if (passesLeft <= 0 && money >= minRequiredBid) {
-      return;
+    if (isPass) {
+      const passesLeft = MAX_PASSES - passesUsed[active];
+      const money = active === 'P1' ? p1Money : p2Money;
+
+      // Prevent pass if player has no passes left and has enough money to bid
+      if (passesLeft <= 0 && money >= minRequiredBid) {
+        return;
+      }
+
+      // Track pass count ONLY when passing on opening bid
+      setPassesUsed((prev) => ({ ...prev, [active]: prev[active] + 1 }));
     }
-
-    // Track pass count
-    setPassesUsed((prev) => ({ ...prev, [active]: prev[active] + 1 }));
 
     const opponent: Player = active === 'P1' ? 'P2' : 'P1';
 
@@ -430,15 +434,15 @@ export const BidGame: React.FC<BidGameProps> = ({
                     {/* Concede / Pass Button */}
                     <button
                       type="button"
-                      disabled={isP1PassDisabled}
+                      disabled={isP1ActionDisabled}
                       onClick={handleConcede}
                       className="w-full py-2 px-3 bg-rose-600 hover:bg-rose-500 disabled:opacity-40 disabled:hover:bg-rose-600 disabled:cursor-not-allowed text-white font-black text-xs uppercase tracking-wider border-2 border-white rounded-xl shadow-xs active:scale-95 disabled:active:scale-100 cursor-pointer flex items-center justify-center gap-1"
                     >
                       <AlertCircle className="w-3.5 h-3.5" />
-                      {isP1PassDisabled
+                      {currentHighBidder !== null
+                        ? 'Concede'
+                        : isP1ActionDisabled
                         ? 'Must Bid (0 Passes)'
-                        : currentHighBidder !== null
-                        ? `Concede (${p1PassesLeft} left)`
                         : `Pass (${p1PassesLeft} left)`}
                     </button>
                   </motion.div>
@@ -556,15 +560,15 @@ export const BidGame: React.FC<BidGameProps> = ({
                     {/* Concede / Pass Button */}
                     <button
                       type="button"
-                      disabled={isP2PassDisabled}
+                      disabled={isP2ActionDisabled}
                       onClick={handleConcede}
                       className="w-full py-2 px-3 bg-rose-600 hover:bg-rose-500 disabled:opacity-40 disabled:hover:bg-rose-600 disabled:cursor-not-allowed text-white font-black text-xs uppercase tracking-wider border-2 border-white rounded-xl shadow-xs active:scale-95 disabled:active:scale-100 cursor-pointer flex items-center justify-center gap-1"
                     >
                       <AlertCircle className="w-3.5 h-3.5" />
-                      {isP2PassDisabled
+                      {currentHighBidder !== null
+                        ? 'Concede'
+                        : isP2ActionDisabled
                         ? 'Must Bid (0 Passes)'
-                        : currentHighBidder !== null
-                        ? `Concede (${p2PassesLeft} left)`
                         : `Pass (${p2PassesLeft} left)`}
                     </button>
                   </motion.div>
