@@ -62,10 +62,10 @@ export const PassDeviceScreen: React.FC<PassDeviceScreenProps> = ({
 
         <button
           onClick={onReady}
-          className="w-full py-3.5 px-6 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-comic font-bold text-sm uppercase flex items-center justify-center gap-2 transition-all active:scale-[0.99] shadow-md border-2 border-white/20 cursor-pointer"
+          className="w-full py-3.5 px-6 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-comic font-bold text-sm uppercase flex items-center justify-center gap-2 transition-all active:scale-[0.99] shadow-lg border-2 border-amber-200 cursor-pointer"
         >
           I am {playerLabel}
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-4 h-4 stroke-[2.5]" />
         </button>
       </motion.div>
     </div>
