@@ -3529,5 +3529,53 @@ export const INITIAL_CHARACTERS: Character[] = [
     category: 'Dr. Stone',
     imageUrl: 'https://images4.alphacoders.com/140/1401145.png',
   },
+  {
+    id: 'char-557',
+    name: 'Ichigo Kurosaki',
+    category: 'Bleach',
+    imageUrl: 'https://i.pinimg.com/736x/a2/35/69/a235692563d080a6534411d1af17b84b.jpg',
+  },
+  {
+    id: 'char-558',
+    name: 'Rukia Kuchiki',
+    category: 'Bleach',
+    imageUrl: 'https://i.pinimg.com/736x/e2/64/e4/e264e47b5abd5d649e5a6d2d0ce59f44.jpg',
+  },
+  {
+    id: 'char-559',
+    name: 'Orihime Inoue',
+    category: 'Bleach',
+    imageUrl: 'https://preview.redd.it/what-do-you-think-of-orihime-best-girl-btw-v0-6jnxvutujg0c1.jpg?width=554&format=pjpg&auto=webp&s=aba070cd767bae35221450708077784d7bb50c3b',
+  },
+  {
+    id: 'char-560',
+    name: 'Uryu Ishida',
+    category: 'Bleach',
+    imageUrl: 'https://i.pinimg.com/736x/7b/4f/01/7b4f01dcacc2620b92412efcdf7bf75b.jpg',
+  },
+  {
+    id: 'char-561',
+    name: 'Chad',
+    category: 'Bleach',
+    imageUrl: 'https://i.pinimg.com/474x/e1/04/3b/e1043bcaeebb8f59247afbea4ddf729d.jpg',
+  },
+  {
+    id: 'char-562',
+    name: 'Renji Abarai',
+    category: 'Bleach',
+    imageUrl: 'https://static.wikia.nocookie.net/bleach/images/8/81/Ep320RenjiProfile.png/revision/latest?cb=20231105054609&path-prefix=en',
+  },
+  {
+    id: 'char-563',
+    name: 'Kisuke Urahara',
+    category: 'Bleach',
+    imageUrl: 'https://static.wikia.nocookie.net/bleach/images/8/8f/Ep6KisukeUrahara.png/revision/latest/scale-to-width-down/250?cb=20210313004610&path-prefix=en',
+  },
+  {
+    id: 'char-564',
+    name: 'Aizen Sosuke',
+    category: 'Bleach',
+    imageUrl: 'https://avatarfiles.alphacoders.com/377/377437.jpg',
+  },
 
 ];
