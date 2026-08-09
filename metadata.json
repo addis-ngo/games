@@ -1,0 +1,8 @@
+{
+  "name": "Anime Game V5",
+  "description": "A simplistic digital Guess Who game with custom character library and pass-and-play multiplayer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

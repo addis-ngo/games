@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@keyframes gridGlowSweep {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.animate-grid-line-glow {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.2) 38%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.2) 62%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  background-size: 250% 250%;
+  animation: gridGlowSweep 12s linear infinite;
+}
+
+/* Tiny Blue Dots Grid Background */
+.bg-blue-dot-grid {
+  background-color: #ffffff;
+  background-image: radial-gradient(#3b82f6 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+body {
+  background-color: #ffffff;
+  background-image: radial-gradient(#3b82f6 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+button, .btn {
+  font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive, sans-serif !important;
+}
+
+.font-comic {
+  font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+  color: #000000;
+}
+
+.font-orbitron {
+  font-family: 'Orbitron', sans-serif;
+}
+
+.font-rajdhani {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.font-bangers {
+  font-family: 'Bangers', cursive, sans-serif;
+}
+
+.font-shojumaru {
+  font-family: 'Shojumaru', cursive, sans-serif;
+}
+
+/* Anime Title Outline & Clean Shadow */
+.anime-title-stroke {
+  -webkit-text-stroke: 2px #000000;
+  paint-order: stroke fill;
+  text-shadow: 
+    2px 2px 0px #000000,
+    -2px -2px 0px #000000,
+    2px -2px 0px #000000,
+    -2px 2px 0px #000000;
+}
+
+
