@@ -15,6 +15,8 @@ interface BidGameProps {
   onHome: () => void;
 }
 
+const MAX_PASSES = 3;
+
 export const BidGame: React.FC<BidGameProps> = ({
   characters,
   onHome,
@@ -31,6 +33,9 @@ export const BidGame: React.FC<BidGameProps> = ({
   const [p2Money, setP2Money] = useState<number>(20);
   const [p1Roster, setP1Roster] = useState<BidRosterItem[]>([]);
   const [p2Roster, setP2Roster] = useState<BidRosterItem[]>([]);
+
+  // Pass Allowance State (Limit 3 passes per player)
+  const [passesUsed, setPassesUsed] = useState<{ P1: number; P2: number }>({ P1: 0, P2: 0 });
 
   // Auction State
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -58,6 +63,12 @@ export const BidGame: React.FC<BidGameProps> = ({
   // Active turn player helper info
   const activeMoney = currentTurn === 'P1' ? p1Money : p2Money;
   const minRequiredBid = currentHighBid === 0 ? 1 : currentHighBid + 1;
+
+  const p1PassesLeft = Math.max(0, MAX_PASSES - passesUsed.P1);
+  const p2PassesLeft = Math.max(0, MAX_PASSES - passesUsed.P2);
+
+  const isP1PassDisabled = p1PassesLeft <= 0 && p1Money >= minRequiredBid;
+  const isP2PassDisabled = p2PassesLeft <= 0 && p2Money >= minRequiredBid;
 
   // Check game over condition
   useEffect(() => {
@@ -119,8 +130,18 @@ export const BidGame: React.FC<BidGameProps> = ({
     if (animatingWinner) return;
 
     const active = currentTurn;
+    const passesLeft = MAX_PASSES - passesUsed[active];
+    const money = active === 'P1' ? p1Money : p2Money;
+
+    // Prevent pass if player has no passes left and has enough money to bid
+    if (passesLeft <= 0 && money >= minRequiredBid) {
+      return;
+    }
+
+    // Track pass count
+    setPassesUsed((prev) => ({ ...prev, [active]: prev[active] + 1 }));
+
     const opponent: Player = active === 'P1' ? 'P2' : 'P1';
-    const opponentMoney = opponent === 'P1' ? p1Money : p2Money;
 
     // Case 1: Someone already placed a high bid -> Winner claims character!
     if (currentHighBidder !== null) {
@@ -327,9 +348,14 @@ export const BidGame: React.FC<BidGameProps> = ({
                       <div className="text-[10px] sm:text-xs font-black uppercase text-blue-100 tracking-wider truncate max-w-[85px] sm:max-w-[110px]">
                         {p1Name}
                       </div>
-                      <div className="text-xs sm:text-sm font-black text-amber-300 flex items-center gap-0.5">
-                        <DollarSign className="w-3.5 h-3.5 stroke-[3]" />
-                        <span>{p1Money}</span>
+                      <div className="flex items-center gap-1.5 mt-0.5">
+                        <div className="text-xs sm:text-sm font-black text-amber-300 flex items-center gap-0.5">
+                          <DollarSign className="w-3.5 h-3.5 stroke-[3]" />
+                          <span>{p1Money}</span>
+                        </div>
+                        <div className="text-[9px] sm:text-[10px] font-black text-blue-100 bg-blue-900/80 px-1.5 py-0.5 rounded border border-white/20 whitespace-nowrap">
+                          Passes: {p1PassesLeft}/3
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -401,14 +427,19 @@ export const BidGame: React.FC<BidGameProps> = ({
                       </button>
                     </div>
 
-                    {/* Concede Button */}
+                    {/* Concede / Pass Button */}
                     <button
                       type="button"
+                      disabled={isP1PassDisabled}
                       onClick={handleConcede}
-                      className="w-full py-2 px-3 bg-rose-600 hover:bg-rose-500 text-white font-black text-xs uppercase tracking-wider border-2 border-white rounded-xl shadow-xs active:scale-95 cursor-pointer flex items-center justify-center gap-1"
+                      className="w-full py-2 px-3 bg-rose-600 hover:bg-rose-500 disabled:opacity-40 disabled:hover:bg-rose-600 disabled:cursor-not-allowed text-white font-black text-xs uppercase tracking-wider border-2 border-white rounded-xl shadow-xs active:scale-95 disabled:active:scale-100 cursor-pointer flex items-center justify-center gap-1"
                     >
                       <AlertCircle className="w-3.5 h-3.5" />
-                      {currentHighBidder !== null ? `Concede` : 'Pass'}
+                      {isP1PassDisabled
+                        ? 'Must Bid (0 Passes)'
+                        : currentHighBidder !== null
+                        ? `Concede (${p1PassesLeft} left)`
+                        : `Pass (${p1PassesLeft} left)`}
                     </button>
                   </motion.div>
                 )}
@@ -432,9 +463,14 @@ export const BidGame: React.FC<BidGameProps> = ({
                       <div className="text-[10px] sm:text-xs font-black uppercase text-red-100 tracking-wider truncate max-w-[85px] sm:max-w-[110px]">
                         {p2Name}
                       </div>
-                      <div className="text-xs sm:text-sm font-black text-amber-300 flex items-center justify-end gap-0.5">
-                        <DollarSign className="w-3.5 h-3.5 stroke-[3]" />
-                        <span>{p2Money}</span>
+                      <div className="flex items-center justify-end gap-1.5 mt-0.5">
+                        <div className="text-[9px] sm:text-[10px] font-black text-red-100 bg-red-900/80 px-1.5 py-0.5 rounded border border-white/20 whitespace-nowrap">
+                          Passes: {p2PassesLeft}/3
+                        </div>
+                        <div className="text-xs sm:text-sm font-black text-amber-300 flex items-center justify-end gap-0.5">
+                          <DollarSign className="w-3.5 h-3.5 stroke-[3]" />
+                          <span>{p2Money}</span>
+                        </div>
                       </div>
                     </div>
                     {p2PopChar ? (
@@ -517,14 +553,19 @@ export const BidGame: React.FC<BidGameProps> = ({
                       </button>
                     </div>
 
-                    {/* Concede Button */}
+                    {/* Concede / Pass Button */}
                     <button
                       type="button"
+                      disabled={isP2PassDisabled}
                       onClick={handleConcede}
-                      className="w-full py-2 px-3 bg-rose-600 hover:bg-rose-500 text-white font-black text-xs uppercase tracking-wider border-2 border-white rounded-xl shadow-xs active:scale-95 cursor-pointer flex items-center justify-center gap-1"
+                      className="w-full py-2 px-3 bg-rose-600 hover:bg-rose-500 disabled:opacity-40 disabled:hover:bg-rose-600 disabled:cursor-not-allowed text-white font-black text-xs uppercase tracking-wider border-2 border-white rounded-xl shadow-xs active:scale-95 disabled:active:scale-100 cursor-pointer flex items-center justify-center gap-1"
                     >
                       <AlertCircle className="w-3.5 h-3.5" />
-                      {currentHighBidder !== null ? `Concede` : 'Pass'}
+                      {isP2PassDisabled
+                        ? 'Must Bid (0 Passes)'
+                        : currentHighBidder !== null
+                        ? `Concede (${p2PassesLeft} left)`
+                        : `Pass (${p2PassesLeft} left)`}
                     </button>
                   </motion.div>
                 )}
@@ -544,10 +585,10 @@ export const BidGame: React.FC<BidGameProps> = ({
                     }}
                     exit={{ scale: 0.8, opacity: 0 }}
                     transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                    className="bg-white border-4 border-amber-400 p-2 sm:p-2.5 rounded-2xl shadow-2xl flex flex-col items-center ring-4 ring-black/30 w-36 sm:w-44 text-slate-950"
+                    className="bg-white border-4 border-amber-400 p-2 sm:p-2.5 rounded-2xl shadow-2xl flex flex-col items-center w-36 sm:w-44 text-slate-950"
                   >
                     {/* Clean Image Container */}
-                    <div className="w-20 h-20 sm:w-28 sm:h-28 bg-indigo-50 border-2 border-slate-900 rounded-xl overflow-hidden relative shadow-md mb-1 group">
+                    <div className="w-20 h-20 sm:w-28 sm:h-28 bg-indigo-50 border-2 border-amber-200 rounded-xl overflow-hidden relative shadow-md mb-1 group">
                       <img
                         src={currentCharacter.imageUrl}
                         alt={currentCharacter.name}
