@@ -20,9 +20,9 @@ export const SecretRevealScreen: React.FC<SecretRevealScreenProps> = ({
 
   return (
     <div
-      className={`min-h-screen ${bgClass} text-white flex flex-col items-center justify-center p-4 sm:p-6 select-none transition-colors duration-300 font-comic`}
+      className={`min-h-screen ${bgClass} text-white flex flex-col items-center justify-center p-4 sm:p-6 select-none font-comic`}
     >
-      <div className="w-full max-w-md bg-white text-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl border-4 border-slate-900 flex flex-col items-center text-center animate-in fade-in zoom-in-95 duration-200">
+      <div className="w-full max-w-md bg-white text-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl border-4 border-slate-900 flex flex-col items-center text-center">
         <div className="mb-2">
           <span
             className={`inline-block px-4 py-1 rounded-full text-xs font-black uppercase tracking-wider text-white ${
