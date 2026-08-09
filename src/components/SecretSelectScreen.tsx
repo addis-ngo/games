@@ -45,7 +45,7 @@ export const SecretSelectScreen: React.FC<SecretSelectScreenProps> = ({
   };
 
   return (
-    <div className={`min-h-screen ${bgClass} text-white flex flex-col p-4 sm:p-6 select-none transition-colors duration-300`}>
+    <div className={`min-h-screen ${bgClass} text-white flex flex-col p-4 sm:p-6 select-none`}>
       <div className="w-full max-w-5xl mx-auto flex flex-col flex-1">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-white/20 gap-3">
