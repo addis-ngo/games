@@ -48,7 +48,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({
   const headerBadgeBg = isP1 ? 'bg-blue-950 text-blue-100' : 'bg-red-950 text-red-100';
 
   return (
-    <div className={`min-h-screen ${bgClass} text-white flex flex-col p-4 sm:p-6 select-none transition-colors duration-300 font-comic`}>
+    <div className={`min-h-screen ${bgClass} text-white flex flex-col p-4 sm:p-6 select-none font-comic`}>
       <div className="w-full max-w-6xl mx-auto flex flex-col flex-1">
         {/* Top Navigation & Status Bar */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-white/20 gap-3">
@@ -83,7 +83,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({
 
                 {/* Popup preview */}
                 {showOwnSecret && (
-                  <div className="absolute right-0 top-10 z-30 bg-white p-3 rounded-2xl border border-slate-200 shadow-xl flex flex-col items-center text-center animate-in fade-in duration-100 w-36">
+                  <div className="absolute right-0 top-10 z-30 bg-white p-3 rounded-2xl border border-slate-200 shadow-xl flex flex-col items-center text-center w-36">
                     <div className="text-[10px] uppercase font-semibold text-slate-400 mb-1.5">
                       Your Character
                     </div>
