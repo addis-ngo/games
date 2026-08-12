@@ -357,9 +357,6 @@ export const BidGame: React.FC<BidGameProps> = ({
                           <DollarSign className="w-3.5 h-3.5 stroke-[3]" />
                           <span>{p1Money}</span>
                         </div>
-                        <div className="text-[9px] sm:text-[10px] font-black text-blue-100 bg-blue-900/80 px-1.5 py-0.5 rounded border border-white/20 whitespace-nowrap">
-                          Passes: {p1PassesLeft}/3
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -468,9 +465,6 @@ export const BidGame: React.FC<BidGameProps> = ({
                         {p2Name}
                       </div>
                       <div className="flex items-center justify-end gap-1.5 mt-0.5">
-                        <div className="text-[9px] sm:text-[10px] font-black text-red-100 bg-red-900/80 px-1.5 py-0.5 rounded border border-white/20 whitespace-nowrap">
-                          Passes: {p2PassesLeft}/3
-                        </div>
                         <div className="text-xs sm:text-sm font-black text-amber-300 flex items-center justify-end gap-0.5">
                           <DollarSign className="w-3.5 h-3.5 stroke-[3]" />
                           <span>{p2Money}</span>
