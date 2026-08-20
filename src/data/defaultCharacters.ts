@@ -4033,17 +4033,5 @@ export const INITIAL_CHARACTERS: Character[] = [
     category: 'Danganronpa',
     imageUrl: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/744bcbc4-5751-4269-83d1-07f7a9f83cc8/dkc6twq-d95cb1d1-33ca-4dbf-be2f-7730bbd8c931.png/v1/fill/w_894,h_894,q_70,strp/monokuma_pfp_by_dukenothing_dkc6twq-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MjA0OCIsInBhdGgiOiIvZi83NDRiY2JjNC01NzUxLTQyNjktODNkMS0wN2Y3YTlmODNjYzgvZGtjNnR3cS1kOTVjYjFkMS0zM2NhLTRkYmYtYmUyZi03NzMwYmJkOGM5MzEucG5nIiwid2lkdGgiOiI8PTIwNDgifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.e7OC3GdP_8WeRM0meRpLtSenCXQHGTTiKPcG0sgaCAg',
   },
-  {
-    id: 'char-630',
-    name: 'Charlie Morningstar',
-    category: 'Hazbin Hotel',
-    imageUrl: 'https://images6.alphacoders.com/121/1214561.png',
-  },
-  {
-    id: 'char-631',
-    name: 'Vaggie',
-    category: 'Hazbin Hotel',
-    imageUrl: 'https://images5.alphacoders.com/124/1246504.jpg',
-  },
 
 ];
